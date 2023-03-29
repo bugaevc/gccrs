@@ -367,7 +367,7 @@ public:
 // A simple path without generic or type arguments
 class SimplePath
 {
-  bool has_opening_scope_resolution;
+  bool opening_scope_resolution;
   std::vector<SimplePathSegment> segments;
   Location locus;
   NodeId node_id;
@@ -377,7 +377,7 @@ public:
   SimplePath (std::vector<SimplePathSegment> path_segments,
 	      bool has_opening_scope_resolution = false,
 	      Location locus = Location ())
-    : has_opening_scope_resolution (has_opening_scope_resolution),
+    : opening_scope_resolution (has_opening_scope_resolution),
       segments (std::move (path_segments)), locus (locus),
       node_id (Analysis::Mappings::get ()->get_next_node_id ())
   {}
@@ -393,6 +393,11 @@ public:
 
   std::string as_string () const;
 
+  bool has_opening_scope_resolution () const
+  {
+    return opening_scope_resolution;
+  }
+
   Location get_locus () const { return locus; }
   NodeId get_node_id () const { return node_id; }
 
@@ -401,7 +406,7 @@ public:
   // path-to-string comparison operator
   bool operator== (const std::string &rhs) const
   {
-    return !has_opening_scope_resolution && segments.size () == 1
+    return !opening_scope_resolution && segments.size () == 1
 	   && segments[0].as_string () == rhs;
   }
 
