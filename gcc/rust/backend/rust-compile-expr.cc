@@ -1881,11 +1881,10 @@ CompileExpr::get_receiver_from_dyn (const TyTy::DynamicObjectType *dyn,
 }
 
 tree
-CompileExpr::resolve_method_address (TyTy::FnType *fntype, HirId ref,
-				     TyTy::BaseType *receiver,
-				     HIR::PathIdentSegment &segment,
-				     Analysis::NodeMapping expr_mappings,
-				     Location expr_locus)
+HIRCompileBase::resolve_method_address (
+  TyTy::FnType *fntype, HirId ref, TyTy::BaseType *receiver,
+  const HIR::PathIdentSegment &segment,
+  const Analysis::NodeMapping &expr_mappings, Location expr_locus)
 {
   // Now we can try and resolve the address since this might be a forward
   // declared function, generic function which has not be compiled yet or

@@ -896,6 +896,9 @@ SubstitutionRef::lookup_associated_impl (const SubstitutionParamMapping &subst,
       && static_cast<const TyTy::InferType *> (binding)->get_infer_kind ()
 	   == TyTy::InferType::InferTypeKind::FLOAT;
 
+  rust_debug ("BINDING");
+  binding->debug ();
+
   Resolver::AssociatedImplTrait *associate_impl_trait = nullptr;
   if (associated_impl_traits.size () == 1)
     {

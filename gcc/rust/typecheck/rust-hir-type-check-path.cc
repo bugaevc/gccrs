@@ -315,18 +315,19 @@ TypeCheckExpr::resolve_segments (NodeId root_resolved_node_id,
 
       bool probe_bounds = true;
       bool probe_impls = !reciever_is_generic;
-      bool ignore_mandatory_trait_items = !reciever_is_generic;
+      // bool ignore_mandatory_trait_items = !reciever_is_generic;
 
       // probe the path is done in two parts one where we search impls if no
       // candidate is found then we search extensions from traits
       auto candidates
 	= PathProbeType::Probe (prev_segment, seg.get_segment (), probe_impls,
-				false, ignore_mandatory_trait_items);
+				false, false /*ignore_mandatory_trait_items*/);
       if (candidates.size () == 0)
 	{
 	  candidates
 	    = PathProbeType::Probe (prev_segment, seg.get_segment (), false,
-				    probe_bounds, ignore_mandatory_trait_items);
+				    probe_bounds,
+				    false /*ignore_mandatory_trait_items*/);
 
 	  if (candidates.size () == 0)
 	    {
